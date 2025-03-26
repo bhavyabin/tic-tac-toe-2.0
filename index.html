@@ -1,0 +1,277 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Calc</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Doto:200;800">
+	<style>
+	.flex-container{
+	    display: flex;
+	    flex-direction: column;
+	    height: 100vh;
+	    justify-content: center;
+	    align-items: center;
+	    text-align: center;
+	}
+	body {
+		background-color: black
+		  }
+
+	img{
+		padding: 10px 10px 10px 10px;
+	}
+
+	h2{
+		color: white;
+		font-family: Doto;
+		font-weight: 200;
+	}
+
+	h1{
+		color: white;
+		font-family: Doto;
+		font-weight: 800;
+	}
+
+	.col{
+		border-style: dotted;
+		border-color: grey;
+	}
+
+	</style>
+</head>
+<body>
+	<div class="flex-container">
+		<h1>A tic-tac-toe</h1>
+		<h2 id="score">player1(X)  :  0 | 0  :  (O)player2</h2>
+		<h2 id="no_of_games">No. of games played: 0</h2>
+		<div class="container-fluid-auto justify-content-center">
+			<div class="row">
+				<div class="col">
+					<button class="btn" type="button" onclick="main(1)">
+						<img src="X_O_images/empty.png" alt=" " id="1" name="0">
+					</button>
+				</div>
+				<div class="col">
+					<button class="btn" type="button" onclick="main(2)">
+						<img src="X_O_images/empty.png" alt=" " id="2" name="0">
+					</button>
+				</div>
+				<div class="col">
+					<button class="btn" type="button" onclick="main(3)">
+						<img src="X_O_images/empty.png" alt=" " id="3" name="0">
+					</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<button class="btn" type="button" onclick="main(4)">
+						<img src="X_O_images/empty.png" alt=" "id="4" name="0">
+					</button>
+				</div>
+				<div class="col">
+					<button class="btn" type="button" onclick="main(5)">
+						<img src="X_O_images/empty.png" alt=" "id="5" name="0">
+					</button>
+				</div>
+				<div class="col">
+					<button class="btn" type="button" onclick="main(6)">
+						<img src="X_O_images/empty.png" alt=" "id="6" name="0">
+					</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<button class="btn" type="button" onclick="main(7)">
+						<img src="X_O_images/empty.png" alt=" "id="7" name="0">
+					</button>
+				</div>
+				<div class="col">
+					<button class="btn" type="button" onclick="main(8)">
+						<img src="X_O_images/empty.png" alt=" "id="8" name="0">
+					</button>
+				</div>
+				<div class="col">
+					<button class="btn" type="button" onclick="main(9)">
+						<img src="X_O_images/empty.png" alt=" "id="9" name="0">
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+	
+		// variables
+		var status,score_x,score_o,score_str,counter,game_counter,is_game_running,i,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9 ;
+		status = 1
+		counter = 0 
+		score_o = 0
+		score_x = 0
+		game_counter = 0
+		is_game_running = true
+
+
+		// main func
+		function main(button) {
+			// counter
+			counter++
+
+
+			// check the status of the button and changing it
+			if (document.getElementById(String(button)).getAttribute("name") == "0"){
+				if (status == 1){
+					// O
+					document.getElementById(String(button)).src = "X_O_images/O-white.png" ;
+					document.getElementById(String(button)).alt = "O";
+					document.getElementById(String(button)).setAttribute("name","1");
+					status = 0;
+				} else {
+					// X
+					document.getElementById(String(button)).src = "X_O_images/X-white.png" ;
+					document.getElementById(String(button)).alt = "X";
+					document.getElementById(String(button)).setAttribute("name","1");
+					status = 1;
+				}
+			}
+			// varibles for alt (getting the values from it so we can know thw value of the buttons)
+			btn1 = document.getElementById("1").getAttribute("alt")
+			btn2 = document.getElementById("2").getAttribute("alt")
+			btn3 = document.getElementById("3").getAttribute("alt")
+			btn4 = document.getElementById("4").getAttribute("alt")
+			btn5 = document.getElementById("5").getAttribute("alt")
+			btn6 = document.getElementById("6").getAttribute("alt")
+			btn7 = document.getElementById("7").getAttribute("alt")
+			btn8 = document.getElementById("8").getAttribute("alt")
+			btn9 = document.getElementById("9").getAttribute("alt")
+
+			const arr = ["",btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9]
+
+			// checking if anyone won
+
+			// O
+			if (( arr[1] == "O" && arr[2] == "O" && arr[3] == "O") ||   // 1st horizontal line 1 2 3
+				( arr[4] == "O" && arr[5] == "O" && arr[6] == "O") ||   // 2st horizontal line 4 5 6
+				( arr[7] == "O" && arr[8] == "O" && arr[9] == "O") ||   // 3st horizontal line 7 8 9
+
+				( arr[3] == "O" && arr[6] == "O" && arr[9] == "O") ||   // 1st vertical line 3 6 9
+				( arr[2] == "O" && arr[5] == "O" && arr[8] == "O") ||   // 2st vertical line 2 5 8
+				( arr[1] == "O" && arr[4] == "O" && arr[7] == "O") ||   // 3st vertical line 1 4 7
+
+				( arr[1] == "O" && arr[5] == "O" && arr[9] == "O") ||   // 1st diagonal line 1,2,3
+				( arr[3] == "O" && arr[5] == "O" && arr[7] == "O") )   // 2st diagonal line 1,2,3
+
+				{
+					score_o++
+					game_counter++
+					is_game_running = false
+					score_str = "player1(X)  :  " + String(score_x) + " | " + String(score_o) + "  :  (O)player2"
+					game_str = "No. of games played: " + String(game_counter)
+					document.getElementById("score").innerHTML = score_str
+					document.getElementById("no_of_games").innerHTML = game_str
+					setTimeout(reset_tic_tac_toe,500)
+				} 
+
+
+				// X
+			if (( arr[1] == "X" && arr[2] == "X" && arr[3] == "X") ||   // 1st horizontal line 1 2 3
+				( arr[4] == "X" && arr[5] == "X" && arr[6] == "X") ||   // 2st horizontal line 4 5 6
+				( arr[7] == "X" && arr[8] == "X" && arr[9] == "X") ||   // 3st horizontal line 7 8 9
+
+				( arr[3] == "X" && arr[6] == "X" && arr[9] == "X") ||   // 1st vertical line 3 6 9
+				( arr[2] == "X" && arr[5] == "X" && arr[8] == "X") ||   // 2st vertical line 2 5 8
+				( arr[1] == "X" && arr[4] == "X" && arr[7] == "X") ||   // 3st vertical line 1 4 7
+
+				( arr[1] == "X" && arr[5] == "X" && arr[9] == "X") ||   // 1st diagonal line 1,2,3
+				( arr[3] == "X" && arr[5] == "X" && arr[7] == "X") )   // 2st diagonal line 1,2,3
+
+				{
+					score_x++
+					game_counter++
+					is_game_running = false
+					score_str = "player1(X)  :  " + String(score_x) + " | " + String(score_o) + "  :  (O)player2"
+					game_str = "No. of games played: " + String(game_counter)
+					document.getElementById("score").innerHTML = score_str
+					document.getElementById("no_of_games").innerHTML = game_str
+					setTimeout(reset_tic_tac_toe,500)
+				}
+
+			if (counter == 9) { 
+				if (is_game_running==true) {
+					game_counter++
+					game_str = "No. of games played: " + String(game_counter)
+					document.getElementById("no_of_games").innerHTML = game_str
+					setTimeout(reset_tic_tac_toe,500);
+				}
+			}
+		}
+
+		// reset func
+		function reset_tic_tac_toe() {
+
+			// reset the variables counter and is_game_running
+			is_game_running = true
+			counter = 0
+
+			// 1
+			document.getElementById("1").src = "X_O_images/empty.png" ;
+			document.getElementById("1").alt = " ";
+			document.getElementById("1").setAttribute("name","0");
+
+			// 2
+			document.getElementById("2").src = "X_O_images/empty.png" ;
+			document.getElementById("2").alt = " ";
+			document.getElementById("2").setAttribute("name","0");
+			
+			// 3
+			document.getElementById("3").src = "X_O_images/empty.png" ;
+			document.getElementById("3").alt = " ";
+			document.getElementById("3").setAttribute("name","0");
+
+			// 4
+			document.getElementById("4").src = "X_O_images/empty.png" ;
+			document.getElementById("4").alt = " ";
+			document.getElementById("4").setAttribute("name","0");
+
+			// 5
+			document.getElementById("5").src = "X_O_images/empty.png" ;
+			document.getElementById("5").alt = " ";
+			document.getElementById("5").setAttribute("name","0");
+
+			// 6
+			document.getElementById("6").src = "X_O_images/empty.png" ;
+			document.getElementById("6").alt = " ";
+			document.getElementById("6").setAttribute("name","0");
+
+			// 7
+			document.getElementById("7").src = "X_O_images/empty.png" ;
+			document.getElementById("7").alt = " ";
+			document.getElementById("7").setAttribute("name","0");
+
+			// 8
+			document.getElementById("8").src = "X_O_images/empty.png" ;
+			document.getElementById("8").alt = " ";
+			document.getElementById("8").setAttribute("name","0");
+
+			// 9
+			document.getElementById("9").src = "X_O_images/empty.png" ;
+			document.getElementById("9").alt = " ";
+			document.getElementById("9").setAttribute("name","0");
+
+		}
+
+
+	</script>
+</body>
+</html>
+
+
+			    
+				
+
+
+
