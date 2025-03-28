@@ -1,14 +1,14 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Calc</title>
+    <title>tic-tac-toe</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Doto:200;800">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Doto:400;700">
 	<style>
 	.flex-container{
 	    display: flex;
@@ -29,74 +29,95 @@
 	h2{
 		color: white;
 		font-family: Doto;
-		font-weight: 200;
+		font-weight: 400;
 	}
 
 	h1{
 		color: white;
 		font-family: Doto;
-		font-weight: 800;
+		font-weight: 700;
 	}
 
-	.col{
-		border-style: dotted;
-		border-color: grey;
+	.blink {
+		animation: blinker 0.5s linear infinite;
+	  }
+	  
+	@keyframes blinker {
+	  50% {
+	    opacity: 0;
+	  }
+	}
+
+	#player1{
+		color: red;
+	}
+
+	#player2{
+		color: blue;
 	}
 
 	</style>
 </head>
 <body>
 	<div class="flex-container">
-		<h1>A tic-tac-toe</h1>
-		<h2 id="score">player1(X)  :  0 | 0  :  (O)player2</h2>
+		<h1 id="white-mode">A tic-tac-toe</h1>
+		<h2 id="score">
+			<span id="player1">
+				<span id="p1" class="blink">player1</span>  :  <span id="score_x">0</span>
+			</span>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+			<span id="player2">
+				<span id="p2">player2</span> : <span id="score_o">0</span>
+			</span>
+		</h2>
 		<h2 id="no_of_games">No. of games played: 0</h2>
-		<div class="container-fluid-auto justify-content-center">
+		<div class="container justify-content-center">
 			<div class="row">
-				<div class="col">
+				<div class="col" style="border-style: none dotted dotted none; border-color: white">
 					<button class="btn" type="button" onclick="main(1)">
 						<img src="X_O_images/empty.png" alt=" " id="1" name="0">
 					</button>
 				</div>
-				<div class="col">
+				<div class="col" style="border-style: none dotted dotted dotted; border-color: white">
 					<button class="btn" type="button" onclick="main(2)">
 						<img src="X_O_images/empty.png" alt=" " id="2" name="0">
 					</button>
 				</div>
-				<div class="col">
+				<div class="col" style="border-style: none none dotted dotted; border-color: white">
 					<button class="btn" type="button" onclick="main(3)">
 						<img src="X_O_images/empty.png" alt=" " id="3" name="0">
 					</button>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col">
+				<div class="col" style="border-style: dotted dotted dotted none; border-color: white">
 					<button class="btn" type="button" onclick="main(4)">
 						<img src="X_O_images/empty.png" alt=" "id="4" name="0">
 					</button>
 				</div>
-				<div class="col">
+				<div class="col" style="border-style: dotted; border-color: white">
 					<button class="btn" type="button" onclick="main(5)">
 						<img src="X_O_images/empty.png" alt=" "id="5" name="0">
 					</button>
 				</div>
-				<div class="col">
+				<div class="col" style="border-style: dotted none dotted dotted; border-color: white">
 					<button class="btn" type="button" onclick="main(6)">
 						<img src="X_O_images/empty.png" alt=" "id="6" name="0">
 					</button>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col">
+				<div class="col" style="border-style: dotted dotted none none; border-color: white">
 					<button class="btn" type="button" onclick="main(7)">
 						<img src="X_O_images/empty.png" alt=" "id="7" name="0">
 					</button>
 				</div>
-				<div class="col">
+				<div class="col" style="border-style: dotted dotted none dotted; border-color: white">
 					<button class="btn" type="button" onclick="main(8)">
 						<img src="X_O_images/empty.png" alt=" "id="8" name="0">
 					</button>
 				</div>
-				<div class="col">
+				<div class="col" style="border-style: dotted none none dotted; border-color: white">
 					<button class="btn" type="button" onclick="main(9)">
 						<img src="X_O_images/empty.png" alt=" "id="9" name="0">
 					</button>
@@ -107,14 +128,14 @@
 	<script>
 	
 		// variables
-		var status,score_x,score_o,score_str,counter,game_counter,is_game_running,i,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9 ;
-		status = 1
+		var status,score_x,score_o,score_str,counter,game_counter,is_game_running,i,white_mode,white,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9 ;
+		status = 0
 		counter = 0 
 		score_o = 0
 		score_x = 0
 		game_counter = 0
 		is_game_running = true
-
+		white_mode = false
 
 		// main func
 		function main(button) {
@@ -125,17 +146,27 @@
 			// check the status of the button and changing it
 			if (document.getElementById(String(button)).getAttribute("name") == "0"){
 				if (status == 1){
+
 					// O
-					document.getElementById(String(button)).src = "X_O_images/O-white.png" ;
+					document.getElementById(String(button)).src = "X_O_images/O-blue-new.png" ;
 					document.getElementById(String(button)).alt = "O";
 					document.getElementById(String(button)).setAttribute("name","1");
+					document.getElementById("p1").setAttribute("class","blink");
+					document.getElementById("p2").setAttribute("class","notblink");
 					status = 0;
+					console.log(String(button) + " O")
+
 				} else {
+
 					// X
-					document.getElementById(String(button)).src = "X_O_images/X-white.png" ;
+					document.getElementById(String(button)).src = "X_O_images/X-red-new.png" ;
 					document.getElementById(String(button)).alt = "X";
 					document.getElementById(String(button)).setAttribute("name","1");
+					document.getElementById("p2").setAttribute("class","blink");
+					document.getElementById("p1").setAttribute("class","notblink");
 					status = 1;
+					console.log(String(button) + " x")
+
 				}
 			}
 			// varibles for alt (getting the values from it so we can know thw value of the buttons)
@@ -169,11 +200,13 @@
 					score_o++
 					game_counter++
 					is_game_running = false
-					score_str = "player1(X)  :  " + String(score_x) + " | " + String(score_o) + "  :  (O)player2"
 					game_str = "No. of games played: " + String(game_counter)
-					document.getElementById("score").innerHTML = score_str
+					document.getElementById("score_o").innerHTML = score_o
 					document.getElementById("no_of_games").innerHTML = game_str
 					setTimeout(reset_tic_tac_toe,500)
+					console.log("O won")
+					console.log(String(score_x) + " | " + String(score_o))
+
 				} 
 
 
@@ -193,11 +226,14 @@
 					score_x++
 					game_counter++
 					is_game_running = false
-					score_str = "player1(X)  :  " + String(score_x) + " | " + String(score_o) + "  :  (O)player2"
 					game_str = "No. of games played: " + String(game_counter)
-					document.getElementById("score").innerHTML = score_str
+					document.getElementById("score_x").innerHTML = score_x
 					document.getElementById("no_of_games").innerHTML = game_str
 					setTimeout(reset_tic_tac_toe,500)
+					console.log("X won")
+					console.log(String(score_x) + " | " + String(score_o))
+
+
 				}
 
 			if (counter == 9) { 
@@ -206,16 +242,28 @@
 					game_str = "No. of games played: " + String(game_counter)
 					document.getElementById("no_of_games").innerHTML = game_str
 					setTimeout(reset_tic_tac_toe,500);
+					console.log("tie")
+					console.log(String(score_x) + " | " + String(score_o))
 				}
 			}
 		}
 
 		// reset func
-		function reset_tic_tac_toe() {
+		function reset_tic_tac_toe(score_reset) {
 
 			// reset the variables counter and is_game_running
 			is_game_running = true
 			counter = 0
+
+			//checking if score reset = true then setting all the var to 0
+			if (score_reset == true){
+
+				score_o = 0
+				score_x = 0
+				counter = 0
+				game_counter = 0
+				status = 0
+			}
 
 			// 1
 			document.getElementById("1").src = "X_O_images/empty.png" ;
@@ -262,16 +310,9 @@
 			document.getElementById("9").alt = " ";
 			document.getElementById("9").setAttribute("name","0");
 
+			console.log("reset")
+
 		}
-
-
 	</script>
 </body>
 </html>
-
-
-			    
-				
-
-
-
