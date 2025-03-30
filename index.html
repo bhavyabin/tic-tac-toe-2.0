@@ -29,7 +29,38 @@
 		image-rendering: pixelated;
 	}
 
-	@media only screen and (max-width: 650px){
+	@media (max-width: 700px){
+
+		
+		#main{
+			gap: 8px
+		}
+
+		#ttt-grid{
+			padding-top: 75px !important;
+		}
+
+		h2{
+			font-size: 22px;
+		}
+
+		h1{
+			font-size: 30px;
+		}
+
+		img{
+			width: 120px;
+			height: 120px;
+		}
+
+
+	}
+
+	@media (max-width: 650px){
+
+		#main{
+			gap: 10px
+		}
 
 		#ttt-grid{
 			padding-top: 75px !important;
@@ -51,7 +82,7 @@
 
 	}
 
-	@media only screen and (max-width: 450px){
+	@media (max-width: 411px){
 
 		h2{
 			font-size: 20px;
@@ -106,7 +137,7 @@
 	</style>
 </head>
 <body>
-	<div class="flex-container">
+	<div class="flex-container" id="main">
 		<h1 id="white-mode">A tic-tac-toe</h1>
 		<h2 id="score">
 			<span id="player1">
